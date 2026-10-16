@@ -1,183 +1,356 @@
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Nora The Explorer - تطبيق الملاحة العراقي</title>
-    <meta name="description" content="تطبيق خرائط وملاحة تفاعلي مخصص للعراق - بديل Waze">
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: 'Segoe UI', Tahoma, Arial, sans-serif;
-        }
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Nora The Explorer - تطبيق الملاحة العراقي الأول</title>
+  <meta name="description" content="تطبيق خرائط وملاحة تفاعلي مخصص للعراق - البديل الذكي والمحلي الموجه للسائق العراقي">
+  
+  <!-- استدعاء خط Cairo وأيقونات FontAwesome لمظهر احترافي -->
+  <link rel="preconnect" href="https://googleapis.com">
+  <link rel="preconnect" href="https://gstatic.com" crossorigin>
+  <link href="https://googleapis.com/css2?family=Cairo:wght@300;400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cloudflare.com">
 
-        body {
-            background: linear-gradient(135deg, #8B5CF6 0%, #6366F1 100%);
-            min-height: 100vh;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            padding: 20px;
-            color: #fff;
-        }
+  <style>
+    :root {
+      --primary: #6366f1;
+      --primary-hover: #4f46e5;
+      --background: #0f172a;
+      --surface: #1e293b;
+      --text-main: #f8fafc;
+      --text-muted: #94a3b8;
+      --accent: #10b981;
+    }
 
-        .container {
-            background: #fff;
-            border-radius: 24px;
-            padding: 40px 30px;
-            max-width: 500px;
-            width: 100%;
-            text-align: center;
-            color: #1F2937;
-            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.2);
-        }
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Cairo', sans-serif;
+    }
 
-        .app-icon {
-            width: 120px;
-            height: 120px;
-            border-radius: 30px;
-            margin: 0 auto 20px;
-            background: linear-gradient(135deg, #8B5CF6, #6366F1);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 60px;
-            box-shadow: 0 10px 30px rgba(139, 92, 246, 0.4);
-        }
+    body {
+      background-color: var(--background);
+      color: var(--text-main);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      overflow-x: hidden;
+    }
 
-        h1 {
-            font-size: 28px;
-            margin-bottom: 8px;
-            color: #1F2937;
-        }
+    /* شريط التنقل العلوي */
+    header {
+      width: 100%;
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 24px 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
 
-        .subtitle {
-            font-size: 14px;
-            color: #6B7280;
-            margin-bottom: 30px;
-            line-height: 1.6;
-        }
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      font-size: 20px;
+      font-weight: 700;
+      letter-spacing: 0.5px;
+    }
 
-        .features {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 12px;
-            margin-bottom: 30px;
-        }
+    .brand i {
+      color: var(--primary);
+      font-size: 24px;
+    }
 
-        .feature {
-            background: #F3F4F6;
-            padding: 14px;
-            border-radius: 12px;
-            font-size: 13px;
-            font-weight: 500;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-        }
+    /* القسم الرئيسي */
+    .hero-container {
+      flex: 1;
+      display: grid;
+      grid-template-columns: 1.2fr 0.8fr;
+      align-items: center;
+      gap: 60px;
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 40px 20px;
+    }
 
-        .feature-icon {
-            font-size: 20px;
-        }
+    .hero-content {
+      text-align: right;
+    }
 
-        .download-btn {
-            display: inline-block;
-            background: linear-gradient(135deg, #8B5CF6, #6366F1);
-            color: #fff;
-            padding: 16px 40px;
-            border-radius: 50px;
-            font-size: 16px;
-            font-weight: bold;
-            text-decoration: none;
-            transition: all 0.3s ease;
-            box-shadow: 0 10px 30px rgba(139, 92, 246, 0.4);
-            margin-bottom: 16px;
-        }
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: rgba(16, 185, 129, 0.1);
+      color: var(--accent);
+      padding: 6px 16px;
+      border-radius: 100px;
+      font-size: 13px;
+      font-weight: 600;
+      margin-bottom: 24px;
+      border: 1px solid rgba(16, 185, 129, 0.2);
+    }
 
-        .download-btn:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 15px 40px rgba(139, 92, 246, 0.6);
-        }
+    h1 {
+      font-size: 42px;
+      font-weight: 700;
+      line-height: 1.3;
+      margin-bottom: 16px;
+      background: linear-gradient(to left, #ffffff, #94a3b8);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
 
-        .info {
-            font-size: 12px;
-            color: #9CA3AF;
-            margin-top: 20px;
-            padding-top: 20px;
-            border-top: 1px solid #E5E7EB;
-        }
+    .subtitle {
+      font-size: 16px;
+      color: var(--text-muted);
+      line-height: 1.8;
+      margin-bottom: 32px;
+      max-width: 540px;
+    }
 
-        .info p {
-            margin: 6px 0;
-        }
+    /* شبكة الميزات */
+    .features-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 16px;
+      margin-bottom: 40px;
+    }
 
-        .badge {
-            display: inline-block;
-            background: #10B981;
-            color: #fff;
-            padding: 3px 10px;
-            border-radius: 20px;
-            font-size: 11px;
-            font-weight: bold;
-            margin-bottom: 12px;
-        }
+    .feature-card {
+      background: var(--surface);
+      padding: 16px 20px;
+      border-radius: 16px;
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      border: 1px solid rgba(255, 255, 255, 0.03);
+      transition: transform 0.2s ease, border-color 0.2s ease;
+    }
 
-        .version {
-            font-size: 13px;
-            color: #6B7280;
-            margin-bottom: 24px;
-        }
-    </style>
+    .feature-card:hover {
+      transform: translateY(-2px);
+      border-color: rgba(99, 102, 241, 0.2);
+    }
+
+    .icon-wrapper {
+      width: 40px;
+      height: 40px;
+      background: rgba(99, 102, 241, 0.1);
+      color: var(--primary);
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 18px;
+    }
+
+    .feature-text {
+      font-size: 14px;
+      font-weight: 600;
+    }
+
+    /* أزرار التحميل والملف */
+    .cta-group {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+
+    .download-btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      background: var(--primary);
+      color: #fff;
+      padding: 16px 36px;
+      border-radius: 12px;
+      font-size: 16px;
+      font-weight: 600;
+      text-decoration: none;
+      transition: all 0.2s ease;
+      width: fit-content;
+    }
+
+    .download-btn:hover {
+      background: var(--primary-hover);
+      transform: translateY(-2px);
+      box-shadow: 0 10px 25px rgba(99, 102, 241, 0.25);
+    }
+
+    .meta-info {
+      display: flex;
+      gap: 24px;
+      font-size: 13px;
+      color: var(--text-muted);
+    }
+
+    .meta-info span {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    /* الجانب البصري (أيقونة التطبيق الكبيرة) */
+    .hero-visual {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      position: relative;
+    }
+
+    .app-mockup {
+      width: 200px;
+      height: 200px;
+      background: linear-gradient(135deg, var(--primary), #8b5cf6);
+      border-radius: 48px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 80px;
+      color: #fff;
+      box-shadow: 0 30px 60px rgba(99, 102, 241, 0.3);
+      position: relative;
+      z-index: 2;
+    }
+
+    /* وتوهج خلفي لإعطاء لمسة جمالية */
+    .visual-glow {
+      position: absolute;
+      width: 300px;
+      height: 300px;
+      background: var(--primary);
+      filter: blur(120px);
+      opacity: 0.15;
+      z-index: 1;
+    }
+
+    .version-tag {
+      font-size: 13px;
+      color: var(--text-muted);
+      background: rgba(255, 255, 255, 0.05);
+      padding: 4px 12px;
+      border-radius: 6px;
+    }
+
+    /* التجاوب مع الشاشات الصغيرة (الهواتف) */
+    @media (max-width: 968px) {
+      .hero-container {
+        grid-template-columns: 1fr;
+        text-align: center;
+        gap: 40px;
+        padding-top: 20px;
+      }
+      .hero-content {
+        text-align: center;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+      }
+      .features-grid {
+        width: 100%;
+        max-width: 500px;
+      }
+      .download-btn {
+        width: 100%;
+        max-content: 400px;
+      }
+      .meta-info {
+        justify-content: center;
+        flex-wrap: wrap;
+        gap: 12px;
+      }
+      .hero-visual {
+        order: -1; /* رفع الأيقونة للأعلى في الموبايل */
+      }
+      .app-mockup {
+        width: 150px;
+        height: 150px;
+        border-radius: 36px;
+        font-size: 60px;
+      }
+    }
+  </style>
 </head>
 <body>
-    <div class="container">
-        <div class="app-icon">🗺️</div>
-        <div class="badge">مجاني تماماً</div>
-        <h1>Nora The Explorer</h1>
-        <p class="subtitle">تطبيق خرائط وملاحة تفاعلي مخصص للعراق</p>
-        <p class="version">الإصدار 1.0.0</p>
 
-        <div class="features">
-            <div class="feature">
-                <span class="feature-icon">🗺️</span>
-                <span>خريطة تفاعلية</span>
-            </div>
-            <div class="feature">
-                <span class="feature-icon">🎙️</span>
-                <span>أصوات عراقية</span>
-            </div>
-            <div class="feature">
-                <span class="feature-icon">🚨</span>
-                <span>إبلاغ مباشر</span>
-            </div>
-            <div class="feature">
-                <span class="feature-icon">⭐</span>
-                <span>أماكن مفضلة</span>
-            </div>
-            <div class="feature">
-                <span class="feature-icon">🚗</span>
-                <span>4 أنواع مركبات</span>
-            </div>
-            <div class="feature">
-                <span class="feature-icon">🎭</span>
-                <span>ترفيه بالطريق</span>
-            </div>
-        </div>
-
-        <!-- ⚠️ استبدل الرابط برابط APK من GitHub Releases -->
-        <a href="https://github.com/USERNAME/nora-explorer/releases/download/v1.0.0/app-release.apk" 
-           class="download-btn" 
-           download>
-            📥 حمّل التطبيق الآن
-        </a>
-
-        <div class="info">
-            <p>💾 الحجم: ~40 ميجابايت</p>
-            <p>📱 يعمل على أندرويد 5.0+</p>
-            <p>🔒 بدون إعلانات، بدون تسجيل إجباري</p>
-        </div>
+  <!-- الشق العلوي للموقع -->
+  <header>
+    <div class="brand">
+      <i class="fa-solid fa-map-location-dot"></i>
+      <span>Nora The Explorer</span>
     </div>
+    <div class="version-tag">الإصدار 1.0.0</div>
+  </header>
+
+  <!-- القسم الأساسي -->
+  <main class="hero-container">
+    
+    <!-- محتوى النصوص والأزرار -->
+    <div class="hero-content">
+      <div class="badge">
+        <i class="fa-solid fa-circle-check"></i> مجاني بالكامل وبدون إعلانات
+      </div>
+      
+      <h1>تطبيق الملاحة والتوجيه المخصص للعراق</h1>
+      <p class="subtitle">تطبيق خرائط تفاعلي ذكي مصمم خصيصاً ليناسب الشوارع العراقية، ويوفر لك تجربة تنقل سلسة وآمنة بديلة للتطبيقات العالمية.</p>
+      
+      <!-- شبكة المميزات -->
+      <div class="features-grid">
+        <div class="feature-card">
+          <div class="icon-wrapper"><i class="fa-solid fa-route"></i></div>
+          <span class="feature-text">خريطة تفاعلية دقيقة</span>
+        </div>
+        <div class="feature-card">
+          <div class="icon-wrapper"><i class="fa-solid fa-microphone"></i></div>
+          <span class="feature-text">توجيه بأصوات عراقية</span>
+        </div>
+        <div class="feature-card">
+          <div class="icon-wrapper"><i class="fa-solid fa-triangle-exclamation"></i></div>
+          <span class="feature-text">إبلاغ مباشر عن الطرق</span>
+        </div>
+        <div class="feature-card">
+          <div class="icon-wrapper"><i class="fa-solid fa-star"></i></div>
+          <span class="feature-text">حفظ الأماكن المفضلة</span>
+        </div>
+        <div class="feature-card">
+          <div class="icon-wrapper"><i class="fa-solid fa-car-side"></i></div>
+          <span class="feature-text">دعم 4 أنواع مركبات</span>
+        </div>
+        <div class="feature-card">
+          <div class="icon-wrapper"><i class="fa-solid fa-masks-theater"></i></div>
+          <span class="feature-text">ترفيه مدمج بالطريق</span>
+        </div>
+      </div>
+
+      <!-- زر التحميل والمعلومات الإضافية -->
+      <div class="cta-group">
+        <!-- ⚠️ استبدل الرابط برابط APK من GitHub Releases -->
+        <a href="https://github.com/USERNAME/nora-explorer/releases/download/v1.0.0/app-release.apk" class="download-btn" download>
+          <i class="fa-solid fa-download"></i> تحميل التطبيق الآن (APK)
+        </a>
+        
+        <div class="meta-info">
+          <span><i class="fa-solid fa-database"></i> الحجم: ~40 ميجابايت</span>
+          <span><i class="fa-solid fa-mobile-screen-button"></i> أندرويد 5.0+</span>
+          <span><i class="fa-solid fa-shield-halved"></i> بدون تسجيل إجباري</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- الجانب البصري للـ Hero -->
+    <div class="hero-visual">
+      <div class="visual-glow"></div>
+      <div class="app-mockup">
+        <i class="fa-solid fa-map-location-dot"></i>
+      </div>
+    </div>
+
+  </main>
+
 </body>
 </html>
