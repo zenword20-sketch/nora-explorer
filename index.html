@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nora The Explorer - تطبيق الملاحة العراقي</title>
+    <meta name="description" content="تطبيق خرائط وملاحة تفاعلي مخصص للعراق - بديل Waze">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Arial, sans-serif;
+        }
+
+        body {
+            background: linear-gradient(135deg, #8B5CF6 0%, #6366F1 100%);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+            color: #fff;
+        }
+
+        .container {
+            background: #fff;
+            border-radius: 24px;
+            padding: 40px 30px;
+            max-width: 500px;
+            width: 100%;
+            text-align: center;
+            color: #1F2937;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.2);
+        }
+
+        .app-icon {
+            width: 120px;
+            height: 120px;
+            border-radius: 30px;
+            margin: 0 auto 20px;
+            background: linear-gradient(135deg, #8B5CF6, #6366F1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 60px;
+            box-shadow: 0 10px 30px rgba(139, 92, 246, 0.4);
+        }
+
+        h1 {
+            font-size: 28px;
+            margin-bottom: 8px;
+            color: #1F2937;
+        }
+
+        .subtitle {
+            font-size: 14px;
+            color: #6B7280;
+            margin-bottom: 30px;
+            line-height: 1.6;
+        }
+
+        .features {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 12px;
+            margin-bottom: 30px;
+        }
+
+        .feature {
+            background: #F3F4F6;
+            padding: 14px;
+            border-radius: 12px;
+            font-size: 13px;
+            font-weight: 500;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .feature-icon {
+            font-size: 20px;
+        }
+
+        .download-btn {
+            display: inline-block;
+            background: linear-gradient(135deg, #8B5CF6, #6366F1);
+            color: #fff;
+            padding: 16px 40px;
+            border-radius: 50px;
+            font-size: 16px;
+            font-weight: bold;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            box-shadow: 0 10px 30px rgba(139, 92, 246, 0.4);
+            margin-bottom: 16px;
+        }
+
+        .download-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 40px rgba(139, 92, 246, 0.6);
+        }
+
+        .info {
+            font-size: 12px;
+            color: #9CA3AF;
+            margin-top: 20px;
+            padding-top: 20px;
+            border-top: 1px solid #E5E7EB;
+        }
+
+        .info p {
+            margin: 6px 0;
+        }
+
+        .badge {
+            display: inline-block;
+            background: #10B981;
+            color: #fff;
+            padding: 3px 10px;
+            border-radius: 20px;
+            font-size: 11px;
+            font-weight: bold;
+            margin-bottom: 12px;
+        }
+
+        .version {
+            font-size: 13px;
+            color: #6B7280;
+            margin-bottom: 24px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="app-icon">🗺️</div>
+        <div class="badge">مجاني تماماً</div>
+        <h1>Nora The Explorer</h1>
+        <p class="subtitle">تطبيق خرائط وملاحة تفاعلي مخصص للعراق</p>
+        <p class="version">الإصدار 1.0.0</p>
+
+        <div class="features">
+            <div class="feature">
+                <span class="feature-icon">🗺️</span>
+                <span>خريطة تفاعلية</span>
+            </div>
+            <div class="feature">
+                <span class="feature-icon">🎙️</span>
+                <span>أصوات عراقية</span>
+            </div>
+            <div class="feature">
+                <span class="feature-icon">🚨</span>
+                <span>إبلاغ مباشر</span>
+            </div>
+            <div class="feature">
+                <span class="feature-icon">⭐</span>
+                <span>أماكن مفضلة</span>
+            </div>
+            <div class="feature">
+                <span class="feature-icon">🚗</span>
+                <span>4 أنواع مركبات</span>
+            </div>
+            <div class="feature">
+                <span class="feature-icon">🎭</span>
+                <span>ترفيه بالطريق</span>
+            </div>
+        </div>
+
+        <!-- ⚠️ استبدل الرابط برابط APK من GitHub Releases -->
+        <a href="https://github.com/USERNAME/nora-explorer/releases/download/v1.0.0/app-release.apk" 
+           class="download-btn" 
+           download>
+            📥 حمّل التطبيق الآن
+        </a>
+
+        <div class="info">
+            <p>💾 الحجم: ~40 ميجابايت</p>
+            <p>📱 يعمل على أندرويد 5.0+</p>
+            <p>🔒 بدون إعلانات، بدون تسجيل إجباري</p>
+        </div>
+    </div>
+</body>
+</html>
